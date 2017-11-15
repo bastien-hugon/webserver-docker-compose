@@ -1,0 +1,29 @@
+phpmyadmin:
+    build: ./build/phpmyadmin/
+    restart: always
+    links:
+    - mysql
+    ports:
+    - 8080:80
+    privileged: true
+    environment:
+        MYSQL_URL:
+
+website:
+    build: ./build/website/
+    restart: always
+    volumes:
+    - ./html:/var/www/html
+    links:
+    - mysql
+    ports:
+    - 80:80
+    privileged: true
+
+mysql:
+    image: mysql
+    restart: always
+    volumes:
+    - ./save/mysql/:/var/lib/mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: passroot
