@@ -23,6 +23,7 @@ website:
 mysql:
     image: mysql
     restart: always
+    privileged: true
     volumes:
     - ./save/mysql/:/var/lib/mysql
     environment:
